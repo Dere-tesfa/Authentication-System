@@ -3,20 +3,20 @@ const users = mongoose.model("users", new mongoose.Schema({
     name: {
         type: String,
         requred: true,
-        maxLength: 5,
+        minLength: 4,
         maxLength: 15,
     },
     email: {
         type: String,
         requred: true,
-        mixLength: 5,
+        minLength: 4,
         maxLength: 255,
         unique: true,
     },
     password: {
         type: String,
         requred: true,
-        minLength: 5,
+        minLength: 3,
         maxLength: 255,
     }
 }));
