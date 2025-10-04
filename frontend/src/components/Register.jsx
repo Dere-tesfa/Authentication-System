@@ -1,84 +1,57 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Register() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        password: ""
-    });
+    const [formData, setFormData] = useState({ name: "", email: "", password: "" });
     const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }));
+        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage("");
+        setLoading(true);
 
         try {
-            const res = await axios.post("/api/users", formData);
-            setMessage(res.data); // success message from server
+            await axios.post("/api/users", formData);
+            setMessage("Registered successfully!!");
             setFormData({ name: "", email: "", password: "" });
+
+            setTimeout(() => navigate("/login"), 1500); // redirect after 1.5s
         } catch (err) {
-            if (err.response) {
-                setMessage(err.response.data); // server error message
-            } else {
-                setMessage("Error: " + err.message);
-            }
+            setMessage(err.response?.data || "Error: " + err.message);
+        } finally {
+            setLoading(false);
         }
     };
+    const styles = {
+        constainers: { display: "flex", justifyContent: "center", marginTop: "50px", },
+        FormContainer: { padding: "10px", border: "1px solid #ccc", borderRadius: "5px", width: "250px" },
+        form: { display: "flex", flexDirection: "column", padding: "15px" },
+        input: { padding: '5px', outline: "none", borderRadius: "5px", textAlign: "center", fontFamily: "monolic", fontWeight: "bold", border: "none", border: "1px solid gray" },
+        btn: { padding: "10px", marginTop: "10px", borderRadius: "5px", border: "none", fontSize: "20px", backgroundColor: "green", color: "white" }
+    }
 
     return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-            <div style={{ fontFamily: "Arial", padding: "20px", border: "1px solid #ccc", borderRadius: "5px" }}>
-                <h1>Register</h1>
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
-                    <label>
-                        Name:
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                            style={{ padding: "8px", fontSize: "16px", marginBottom: "10px", outline: "none" }}
-                        />
-                    </label>
-                    <label>
-                        Email:
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            style={{ padding: "8px", fontSize: "16px", marginBottom: "10px" }}
-                        />
-                    </label>
-                    <label>
-                        Password:
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            style={{ padding: "8px", fontSize: "16px", marginBottom: "10px" }}
-                        />
-                    </label>
-                    <button
-                        type="submit"
-                        style={{ padding: "10px", fontSize: "16px", cursor: "pointer" }}
-                    >
-                        Register
-                    </button>
+        <div style={styles.constainers}>
+            <div style={styles.FormContainer}>
+                <h1 style={{ textAlign: "center" }}>Register</h1>
+                <hr />
+                <form onSubmit={handleSubmit} style={styles.form}>
+                    <label>Name:</label>
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} required style={styles.input} />
+                    <label>Email:</label>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} required style={styles.input} />
+                    <label>Password:</label>
+                    <input type="password" name="password" value={formData.password} onChange={handleChange} required style={styles.input} />
+                    <button style={styles.btn} type="submit" disabled={loading}>{loading ? "Registering..." : "Register"}</button>
                 </form>
-                {message && <p style={{ marginTop: "10px" }}>{message}</p>}
+                {message && <p>{message}</p>}
             </div>
         </div>
     );
