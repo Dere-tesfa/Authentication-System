@@ -30,6 +30,8 @@ const router = express.Router();
 //     await user.save();
 //     res.send(_.pick(user, ['_id', 'name', 'email', 'password']));
 // })
+
+//post
 router.post("/", async (req, res) => {
     const { name, email, password } = req.body;
     let register = await userimport.findOne({ email: req.body.email });

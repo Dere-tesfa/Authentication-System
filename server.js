@@ -4,7 +4,12 @@ const importRouter = require("./routers/register")
 const login = require("./routers/login");
 require('dotenv').config(); //load file
 
+
 const app = express();
+app.use(express.static("public"));
+//middleware
+app.use(express.json());
+
 const db = process.env.MONGO_URI;
 mongoose.connect(db);
 try {
@@ -18,6 +23,7 @@ catch (err) {
 app.use(express.json());
 app.use("/api/users", importRouter);
 app.use("/api/login", login)
+
 const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`server port is running on http://localhost:${port}`);
