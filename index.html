@@ -9,94 +9,10 @@
 </head>
 
 <body>
-    <main class="container">
-        <form id="registerForm" class="card" method="POST" action="/api/users" novalidate>
-            <h1 class="title">Create account</h1>
+    <h1>items</h1>
+    <h1>items</h1>
+    <h1>items</h1>
 
-            <label class="field">
-                <span class="label-text">Full name</span>
-                <input type="text" name="name" id="name" required minlength="2" placeholder="Your full name" />
-            </label>
-
-            <label class="field">
-                <span class="label-text">Email address</span>
-                <input type="email" name="email" id="email" required placeholder="you@example.com" />
-            </label>
-
-            <label class="field">
-                <span class="label-text">Password</span>
-                <div class="password-row">
-                    <input type="password" name="password" id="password" required minlength="6"
-                        placeholder="Choose a secure password" />
-                    <button type="button" id="togglePwd" class="btn-icon" aria-label="Show password">👁️</button>
-                </div>
-                <meter id="pwdStrength" min="0" max="4" low="2" high="3" optimum="4" value="0"></meter>
-                <small id="pwdHint" class="hint">Use at least 6 characters. Mix letters and numbers for stronger
-                    password.</small>
-            </label>
-
-            <button type="submit" class="btn primary">Register</button>
-
-            <p class="muted">Already have an account? <a href="/login">Sign in</a></p>
-
-            <div id="formMsg" role="status" aria-live="polite" class="form-msg"></div>
-        </form>
-    </main>
-
-    <script>
-        // small client-side helpers: toggle password, strength meter, basic validation
-        (function () {
-            const pwd = document.getElementById('password');
-            const toggle = document.getElementById('togglePwd');
-            const meter = document.getElementById('pwdStrength');
-            const hint = document.getElementById('pwdHint');
-            const form = document.getElementById('registerForm');
-            const msg = document.getElementById('formMsg');
-
-            toggle.addEventListener('click', () => {
-                pwd.type = pwd.type === 'password' ? 'text' : 'password';
-                toggle.textContent = pwd.type === 'password' ? '👁️' : '🙈';
-            });
-
-            // simple password strength heuristic
-            function scorePassword(s) {
-                let score = 0;
-                if (!s) return 0;
-                if (s.length >= 6) score++;
-                if (/[A-Z]/.test(s)) score++;
-                if (/[0-9]/.test(s)) score++;
-                if (/[^A-Za-z0-9]/.test(s)) score++;
-                return Math.min(score, 4);
-            }
-
-            pwd.addEventListener('input', () => {
-                const sc = scorePassword(pwd.value);
-                meter.value = sc;
-                if (sc <= 1) hint.textContent = 'Weak — make it longer or add numbers/symbols.';
-                else if (sc === 2) hint.textContent = 'Okay — add uppercase or symbols to strengthen.';
-                else if (sc === 3) hint.textContent = 'Good — almost there.';
-                else hint.textContent = 'Strong password.';
-            });
-
-            // optional: friendly inline feedback on submit
-            form.addEventListener('submit', (e) => {
-                msg.textContent = '';
-                // ensure browser validation runs first
-                if (!form.checkValidity()) {
-                    msg.textContent = 'Please fix the highlighted fields.';
-                    msg.className = 'form-msg error';
-                    return;
-                }
-
-                // you can show a small client-side message; actual registration result comes from server
-                msg.textContent = 'Submitting…';
-                msg.className = 'form-msg info';
-
-                // NOTE: we let the browser submit the form (full page POST).
-                // If you prefer AJAX/submission handling with fetch, replace this block with fetch() and preventDefault().
-            });
-        })();
-    </script>
 </body>
 
 </html>
