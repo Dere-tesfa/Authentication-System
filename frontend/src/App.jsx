@@ -15,10 +15,14 @@ export default function App() {
         <div>
             {/* Navigation */}
             <nav style={styles.nav}>
-                <Link style={{ textDecoration: "none" }} to="/dashbord">Home</Link>
+                {/* <Link style={{ textDecoration: "none" }} to="/dashbord">Home</Link> */}
                 <nav>
-                    <Link style={{ textDecoration: "none" }} to="/register">Register</Link>
-                    <Link style={{ textDecoration: "none" }} to="/login">Login</Link>
+                    <Link style={{
+                        textDecoration: "none", textAlign: "center", background: "blue", color: "white", padding: "10px", borderRadius: "5px", margin: "10px", display: "flex",
+
+                        justifyContent: "center"
+                    }} to="/register">Register</Link>
+                    {/* <Link style={{ textDecoration: "none" }} to="/login">Login</Link> */}
                 </nav>
             </nav>
 

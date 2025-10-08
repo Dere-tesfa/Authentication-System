@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import img from "../../public/logo.jpg";
 export default function Login() {
     const [formData, setFormData] = useState({
         email: "",
@@ -39,13 +39,14 @@ export default function Login() {
         constainers: { display: "flex", justifyContent: "center", marginTop: "50px" },
         FormContainer: { padding: "10px", border: "1px solid #ccc", borderRadius: "5px", width: "250px" },
         form: { display: "flex", flexDirection: "column", padding: "15px" },
-        input: { padding: '5px', outline: "none", borderRadius: "5px", textAlign: "center", fontFamily: "monolic", fontWeight: "bold", border: "none", border: "1px solid gray" },
+        input: { padding: '10px', outline: "none", borderRadius: "5px", textAlign: "center", fontFamily: "monolic", fontWeight: "bold", border: "1px solid #e9e2e2ff" },
         btn: { padding: "10px", marginTop: "10px", borderRadius: "5px", border: "none", fontSize: "20px", backgroundColor: "green", color: "white" }
     }
 
     return (
         <div style={styles.constainers}>
             <div style={styles.FormContainer}>
+                <img src={img} style={{ width: "100%", borderRadius: "5px" }} alt="" />
                 <h1 style={{ textAlign: "center" }}>Login</h1>
                 <hr />
                 <form onSubmit={handleSubmit} style={styles.form}>
@@ -74,7 +75,7 @@ export default function Login() {
                     </button>
                 </form>
 
-                {message && <p style={{ marginTop: "10px", fontWeight: "bold" }}>{message}</p>}
+                {message && <p style={{ marginTop: "10px", fontWeight: "bold", textAlign: "center", color: "red" }}>{message}</p>}
             </div>
         </div>
     );

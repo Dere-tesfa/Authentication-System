@@ -57,7 +57,7 @@ export default function Register() {
                     <input type="password" name="password" value={formData.password} onChange={handleChange} required style={styles.input} />
                     <button style={styles.btn} type="submit" disabled={loading}>{loading ? "Registering..." : "Register"}</button>
                 </form>
-                {message && <p>{message}</p>}
+                {message && <p style={{ textAlign: "center", color: "red" }}>{message}</p>}
             </div>
         </div>
     );
