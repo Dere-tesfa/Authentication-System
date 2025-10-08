@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import img from "../../public/logo.jpg";
 export default function Register() {
-    const [formData, setFormData] = useState({ name: "", email: "", department: "", skill: "", password: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", phone: "", department: "", skill: "", password: "" });
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Register() {
         try {
             await axios.post("/api/users", formData);
             setMessage("Registered successfully!!");
-            setFormData({ name: "", email: "", department: "", skill: "", password: "" });
+            setFormData({ name: "", email: "", phone: "", department: "", skill: "", password: "" });
 
             setTimeout(() => navigate("/login"), 1500); // redirect after 1.5s
         } catch (err) {
@@ -49,6 +49,8 @@ export default function Register() {
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required style={styles.input} />
                     <label style={styles.label}>Email:</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required style={styles.input} />
+                    <label style={styles.label}>PhoneNumber:</label>
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required style={styles.input} />
                     <label style={styles.label}>Department:</label>
                     <input type="text" name="department" value={formData.department} onChange={handleChange} required style={styles.input} />
                     <label style={styles.label}>Skill:</label>

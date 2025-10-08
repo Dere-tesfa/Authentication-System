@@ -33,12 +33,13 @@ const router = express.Router();
 
 //post
 router.post("/", async (req, res) => {
-    const { name, email, department, skill, password } = req.body;
+    const { name, email, phone, department, skill, password } = req.body;
     let register = await userimport.findOne({ email: req.body.email });
     if (register) return res.status(400).send("already register!");
     register = new userimport({
         name,
         email,
+        phone,
         department,
         skill,
         password,
