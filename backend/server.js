@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const importRouter = require("../routers/register")
-const login = require("../routers/login");
+const importRouter = require("./routers/register")
+const login = require("./routers/login");
 require('dotenv').config(); //load file
 
 
