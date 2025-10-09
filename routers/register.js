@@ -3,15 +3,15 @@ const _ = require("lodash");
 const userimport = require("../models/user")
 const express = require("express");
 const router = express.Router();
-// router.get("/", (req, res) => {
-//     userimport.find({})
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(error => {
-//             res.send(error);
-//         })
-// })
+router.get("/", (req, res) => {
+    userimport.find({})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(error => {
+            res.send(error);
+        })
+})
 
 //_ library
 // router.post("/", async (req, res) => {
