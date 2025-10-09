@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const _ = require("lodash");
-const userimport = require("../models/user")
+const userimport = require("../backend/models/user");
 const express = require("express");
 const router = express.Router();
 router.get("/", (req, res) => {
